@@ -1,41 +1,21 @@
-import 'package:counter_app/ekinchi_bet.dart';
+import 'dart:developer';
+
+import 'package:counter_app/app/modules/first/controller/first_controller.dart';
+import 'package:counter_app/app/modules/second/view/second_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class CounterPage extends StatefulWidget {
-  const CounterPage({super.key});
-
-  @override
-  State<CounterPage> createState() => _CounterPageState();
-}
-
-class _CounterPageState extends State<CounterPage> {
-  int san = 0;
-
-  void koshuu() {
-    setState(() {
-      san++;
-    });
-  }
-
-  void kemituu() {
-    setState(() {
-      san--;
-    });
-  }
-
-  int san2 = 0;
-  void basuu() {
-    setState(() {
-      san2++;
-    });
-  }
+class FirstView extends StatelessWidget {
+  FirstView({super.key});
+  final _firstController = Get.put<FirstController>(FirstController());
 
   @override
   Widget build(BuildContext context) {
+    log('buildCount ====>${_firstController.buildCount.value++}');
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Тапшырма 1',
+          'Couter App',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -51,9 +31,7 @@ class _CounterPageState extends State<CounterPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EkinchiBet(
-                      san: san,
-                    ),
+                    builder: (context) => SecondView(),
                   ),
                 );
               },
@@ -71,9 +49,11 @@ class _CounterPageState extends State<CounterPage> {
                       'сан:',
                       style: TextStyle(fontSize: 24.0),
                     ),
-                    Text(
-                      '$san',
-                      style: const TextStyle(fontSize: 24.0),
+                    Obx(
+                      () => Text(
+                        'san:${_firstController.san.value}',
+                        style: const TextStyle(fontSize: 24.0),
+                      ),
                     )
                   ],
                 ),
@@ -86,9 +66,7 @@ class _CounterPageState extends State<CounterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () {
-                    kemituu();
-                  },
+                  onTap: () => _firstController.kemituu(),
                   child: Container(
                     width: 100,
                     height: 50,
@@ -105,9 +83,7 @@ class _CounterPageState extends State<CounterPage> {
                   width: 30,
                 ),
                 InkWell(
-                  onTap: () {
-                    koshuu();
-                  },
+                  onTap: () => _firstController.koshuu(),
                   child: Container(
                     width: 100,
                     height: 50,
@@ -123,14 +99,9 @@ class _CounterPageState extends State<CounterPage> {
             const SizedBox(
               height: 30,
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EkinchiBet(san: san),
-                  ),
-                );
+                Get.to(() => SecondView());
               },
               child: Container(
                 width: 100,

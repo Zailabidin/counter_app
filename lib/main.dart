@@ -1,7 +1,6 @@
+import 'package:counter_app/app/modules/first/view/first_view.dart';
 import 'package:flutter/material.dart';
-import 'package:counter_app/counter_page.dart';
-
-import 'ekinchi_bet.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const CounteApp());
@@ -12,13 +11,13 @@ class CounteApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Birinchi Tirkeme',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const CounterPage(),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.red,
+      // ),
+      home: FirstView(),
     );
   }
 }

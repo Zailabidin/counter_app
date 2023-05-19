@@ -1,12 +1,11 @@
+import 'package:counter_app/app/modules/first/controller/first_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class EkinchiBet extends StatelessWidget {
-  EkinchiBet({
-    Key? key,
-    required this.san,
-  }) : super(key: key);
-  int? san;
-  int? san2;
+class SecondView extends StatelessWidget {
+  SecondView();
+  final _firstController = Get.put<FirstController>(FirstController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class EkinchiBet extends StatelessWidget {
           Center(
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Get.back();
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -37,12 +36,12 @@ class EkinchiBet extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'сан:',
+                    Text(
+                      'сан:${_firstController.san.value}',
                       style: TextStyle(fontSize: 24),
                     ),
                     Text(
-                      '$san',
+                      'san',
                       style: const TextStyle(fontSize: 24),
                     ),
                   ],
@@ -68,7 +67,7 @@ class EkinchiBet extends StatelessWidget {
                   style: TextStyle(fontSize: 24),
                 ),
                 Text(
-                  '$san',
+                  'san',
                   style: const TextStyle(fontSize: 24),
                 ),
               ],
